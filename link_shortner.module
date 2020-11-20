@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * Implements hook_theme()
+ * @return mixed
+ */
+function link_shortner_theme() {
+    $theme['link_shortner_list'] = [
+      'variables' => [
+          'entries' => NULL,
+          'headers' => NULL
+        ],
+      'template' => 'link_shortner_list',
+    ];
+    $theme['link_shortner_info_page'] = [
+      'variables' => [
+          'URL' => NULL,
+          'short_URL' => NULL,
+          'qr' => NULL,
+          'redirectCount' => NULL,
+          'link_description' => NULL
+        ],
+      'template' => 'link_shortner_info_page',
+    ];
+    return $theme;
+  }

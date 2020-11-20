@@ -1,0 +1,8 @@
+custom_library:
+  css:
+    base:
+      css/module.css: {}
+  js:
+    js/module.js: {}
+  dependencies:
+    - core/jquery

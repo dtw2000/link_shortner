@@ -1,0 +1,19 @@
+<div>
+ <table>
+  <tr>
+    {% for title in headers %}
+      <th>{{ title }}</th>
+    {% endfor %}
+  </tr>
+  {% for entry in entries %}
+    <tr>
+      {#  {% if E == "odd" %} {% set E = "even" %} {% else %} {% set E = "odd" %} {% endif %}  #}
+      <td>{{ entry.link_description }}</td>
+      <td><a href="{{entry.URL }}">{{ entry.URL|length > 50 ? entry.URL|slice(0, 50) ~ ' ...' : entry.URL  }}</a></td>
+      <td><a href="{{entry.short_URL }}">{{ entry.short_URL }}</a></td>
+      <td><a href="{{entry.info_page }}">{{ entry.info_page }}</a></td>
+      <td>{{ entry.redirectCount }}</td>
+    </tr>
+  {% endfor %}
+ </table>
+</div>

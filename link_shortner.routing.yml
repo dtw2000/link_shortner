@@ -1,0 +1,39 @@
+link_shortner.add:
+  path: '/links'
+  defaults:
+    _title: 'Welcome to the Link Shortner!'
+    _form: '\Drupal\link_shortner\Form\LinkShortnerAddForm'
+  requirements:
+    _permission: 'access content'
+
+# link_shortner.update:
+#   path: '/links/update'
+#   defaults:
+#     _title: 'Update entry'
+#     _form: '\Drupal\link_shortner\Form\LinkShortnerUpdateForm'
+#   requirements:
+#     _role: 'administrator'
+
+link_shortner.redirectByID:
+  path: '/l/{id}'
+  defaults:
+    _controller: '\Drupal\link_shortner\Controller\LinkShortnerController::redirectByID'
+  requirements:
+    _permission: 'access content'
+  options:
+    options:
+      no_cache: 'TRUE'
+    parameters:
+      programID:
+        type: String    
+
+link_shortner.redirectInfoPage:
+  path: '/l/view/{id}'
+  defaults:
+    _controller: '\Drupal\link_shortner\Controller\LinkShortnerController::redirectInfoPage'
+  requirements:
+    _permission: 'access content'
+  options:
+    parameters:
+      programID:
+        type: String    

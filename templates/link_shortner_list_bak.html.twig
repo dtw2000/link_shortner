@@ -1,0 +1,18 @@
+<div>
+ {# {% set E = "odd" %} #}
+<table>
+  <tr>
+    {% for title in headers %}
+      <th>{{ title }}</th>
+    {% endfor %}
+  </tr>
+  {% for entry in resultArr %}
+    <tr>
+      {#  {% if E == "odd" %} {% set E = "even" %} {% else %} {% set E = "odd" %} {% endif %}  #}
+        {% for field in entry %}
+            <td>{{ field }}</td>
+        {% endfor %}
+    </tr>
+  {% endfor %}
+</table>
+</div>

@@ -1,0 +1,111 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the dbtng_example module.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * Creates some default entries on this module custom table.
+ *
+ * @see hook_install()
+ *
+ * @ingroup dbtng_example
+ */
+function link_shortner_install() {
+  // Insert some example data into our schema.
+  $entries = [
+    [
+      'URL' => 'https://www.google.com',
+      'short_URL' => '/l/1',
+      'link_description' => 'Find what you need!',
+      'uid' => '1',
+      'nid' => '1',  
+      'redirectCount' => '0',  
+    ],
+    [
+      'URL' => 'https://www.amazon.com',
+      'short_URL' => '/l/2',
+      'link_description' => 'Buy what you need!',
+      'uid' => '2',
+      'nid' => '1',      
+      'redirectCount' => '0',  
+    ], 
+  ];
+
+  $connection = \Drupal::database();
+  foreach ($entries as $entry) {
+    $connection->insert('link_shortner')->fields($entry)->execute();
+  }
+}
+
+/**
+ * Implements hook_schema().
+ *
+ * Defines the database tables used by this module.
+ *
+ * @see hook_schema()
+ *
+ * @ingroup dbtng_example
+ */
+function link_shortner_schema() {
+  $schema['link_shortner'] = [
+    'description' => 'Stores entries for link shorner purposes.',
+    'fields' => [
+      'pid' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique primary ID.',
+      ],
+      'uid' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => "Creator user's {users}.uid",
+      ],
+      'nid' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => "Creator user's nid",
+      ],
+      'redirectCount' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => "Number of Redirects",
+      ],
+      'URL' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'URL of the link.',
+      ],
+      'short_URL' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Short URL of the link.',
+      ],
+      'link_description' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'description of the link left by the user.',
+      ],
+    ],
+    'primary key' => ['pid'],
+    'indexes' => [
+      'URL' => ['URL'],
+      'short_URL' => ['short_URL'],
+      'nid' => ['nid'],
+    ],
+  ];
+
+  return $schema;
+}
